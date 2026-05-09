@@ -1,0 +1,89 @@
+{
+  "assistant": {
+    "name": "Jarvis",
+    "version": "1.0.0",
+    "persona": "You are JARVIS, an advanced local AI assistant. You are precise, intelligent, and capable of executing system-level actions. When a task requires an action, you MUST respond with a valid JSON action object. For conversation only, respond with plain text."
+  },
+  "llm": {
+    "provider": "ollama",
+    "model": "llama3.1",
+    "base_url": "http://localhost:11434",
+    "connect_timeout": 10,
+    "read_timeout": 300,
+    "max_retries": 2,
+    "temperature": 0.5,
+    "max_tokens": 768,
+    "history_messages": 6,
+    "fallback_models": ["mistral", "llama2", "phi3"]
+  },
+  "memory": {
+    "backend": "sqlite",
+    "db_path": "data/jarvis_memory.db",
+    "vector_backend": "none",
+    "max_context_messages": 12,
+    "conversation_summary_threshold": 50
+  },
+  "tools": {
+    "auto_discover": true,
+    "tools_dir": "tools",
+    "require_confirmation_for": ["system_command", "file_write", "file_delete"],
+    "disabled_tools": []
+  },
+  "safety": {
+    "enabled": true,
+    "whitelist_mode": true,
+    "max_command_length": 500,
+    "allowed_apps": [
+      "chrome", "firefox", "safari", "code", "vscode",
+      "terminal", "finder", "explorer", "notepad",
+      "calculator", "calendar", "spotify", "vlc",
+      "slack", "discord", "zoom", "telegram", "google-cloud-speech"
+    ],
+    "blocked_commands": [
+      "rm -rf", "format", "fdisk", "dd if=", "mkfs",
+      ":(){:|:&};:", "fork bomb", "sudo rm", "deltree",
+      "del /f /s /q c:", "shutdown", "reboot"
+    ],
+    "allowed_file_extensions": [
+      ".txt", ".md", ".json", ".yaml", ".yml", ".csv",
+      ".py", ".js", ".ts", ".html", ".css", ".sh", ".log"
+    ],
+    "restricted_paths": [
+      "/etc", "/sys", "/proc", "/boot",
+      "C:\\Windows", "C:\\System32"
+    ]
+  },
+  "self_improve": {
+    "enabled": true,
+    "analysis_interval_minutes": 60,
+    "min_interactions_before_analysis": 10,
+    "auto_apply_patches": false,
+    "patch_approval_required": true,
+    "max_patches_per_cycle": 5,
+    "log_path": "logs/interactions.jsonl"
+  },
+  "ui": {
+    "mode": "voice",
+    "voice_enabled": true,
+    "tts_engine": "pyttsx3",
+    "stt_engine": "google",
+    "stt_language": "it-IT",
+    "stt_timeout": 6,
+    "stt_phrase_limit": 12,
+    "audio_input_device": 1,
+    "hotword_enabled": true,
+    "hotword": "simo",
+    "tts_voice_contains": "zira",
+    "tts_rate": 185,
+    "tts_volume": 1.0,
+    "prompt_symbol": ">> ",
+    "show_thinking": false,
+    "colored_output": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/jarvis.log",
+    "max_bytes": 10485760,
+    "backup_count": 5
+  }
+}
