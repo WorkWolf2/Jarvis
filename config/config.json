@@ -1,7 +1,7 @@
 {
   "assistant": {
     "name": "Jarvis",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "persona": "You are JARVIS, an advanced local AI assistant. You are precise, intelligent, and capable of executing system-level actions. When a task requires an action, you MUST respond with a valid JSON action object. For conversation only, respond with plain text."
   },
   "llm": {
@@ -57,8 +57,9 @@
     "enabled": true,
     "analysis_interval_minutes": 60,
     "min_interactions_before_analysis": 10,
-    "auto_apply_patches": false,
-    "patch_approval_required": true,
+    "auto_apply_patches": true,
+    "use_llm_for_analysis": false,
+    "patch_approval_required": false,
     "max_patches_per_cycle": 5,
     "log_path": "logs/interactions.jsonl"
   },
@@ -66,13 +67,14 @@
     "mode": "voice",
     "voice_enabled": true,
     "tts_engine": "pyttsx3",
-    "stt_engine": "google",
+    "stt_engine": "vosk",
     "stt_language": "it-IT",
     "stt_timeout": 6,
     "stt_phrase_limit": 12,
     "audio_input_device": 1,
     "hotword_enabled": true,
-    "hotword": "simo",
+    "hotword": "jarvis",
+    "session_timeout_seconds": 25,
     "tts_voice_contains": "zira",
     "tts_rate": 185,
     "tts_volume": 1.0,
